@@ -17,13 +17,8 @@
 
     <?php 
 
-      $payments = array (
-        array("karthi","first","00012223","10,000","30,000", "5-jan,2022",'<i class="bi bi-eye fs-4 text-info eye-btn"></i>'),
-        array("amin","first","00012223","200,000","14,000", "5-jan,2022",'<i class="bi bi-eye fs-4 text-info eye-btn"></i>'),
-        array("ahmad","first","00012223","400,000","50,000", "5-jan,2022",'<i class="bi bi-eye fs-4 text-info eye-btn"></i>'),
-        array("salim","first","00012223","500,000","16,000", "5-jan,2022",'<i class="bi bi-eye fs-4 text-info eye-btn"></i>'),
-        array("asma","first","00012223","600,000", "18,000","5-jan,2022",'<i class="bi bi-eye fs-4 text-info eye-btn"></i>'),
-      );
+      $file_json = file_get_contents('json.json');
+      $content = json_decode($file_json, true);
 
     ?>
 
@@ -63,15 +58,19 @@
                             </thead>
                             <tbody>
                             <?php   
-                              
-                              for ($row = 0; $row < count($payments); $row++) {
-                                echo "<tr>";
-                                for ($col = 0; $col < 7 ; $col++) {
-                                  echo "<th>".$payments[$row][$col]."</th>";
-                                }
-                                echo "</tr>";
+
+                              foreach($content as $payment){
+                                  echo '<tr>
+                                  <td>'.$payment['name'].'</td>
+                                  <td>'.$payment['payment_schedule'].'</td>
+                                  <td>'.$payment['bill_number'].'</td>
+                                  <td>'.$payment['amount_paid'].'</td>
+                                  <td>'.$payment['balance_amount'].'</td>
+                                  <td>'.$payment['date'].'</td>
+                                  <td><i class="bi bi-eye text-info"></i></td>
+                                  </tr>';
                               }
-                              
+
                             ?>
                             </tbody>
                           </table>

@@ -16,14 +16,8 @@
 
     <?php 
 
-      $students = array (
-        array('<img src="pexels-photo-2379004 1.png" alt="">',"username","user@gmail.com","293848459","82838484845859900", "@08-Dec,2022"),
-        array('<img src="pexels-photo-2379004 1.png" alt="">',"username","user@gmail.com","293848459","82838484845859900", "@08-Dec,2022"),
-        array('<img src="pexels-photo-2379004 1.png" alt="">',"username","user@gmail.com","293848459","82838484845859900", "@08-Dec,2022"),
-        array('<img src="pexels-photo-2379004 1.png" alt="">',"username","user@gmail.com","293848459","82838484845859900", "@08-Dec,2022"),
-        array('<img src="pexels-photo-2379004 1.png" alt="">',"username","user@gmail.com","293848459","82838484845859900", "@08-Dec,2022"),
-        array('<img src="pexels-photo-2379004 1.png" alt="">',"username","user@gmail.com","293848459","82838484845859900", "@08-Dec,2022"),
-      );
+        $file_json = file_get_contents(' ');
+        $content = json_decode($file_json, true);
 
     ?>
     <body>
@@ -55,7 +49,7 @@
                   <th scope="col" class="text-capitalize">email</th>
                   <th scope="col" class="text-capitalize">phone</th>
                   <th scope="col" class="text-capitalize">enroll number</th>
-                  <th scope="col" class="text-capitalize">date of admission</th>
+                  <th scope="col" class="text-capitalize text-nowrap">date of admission</th>
                   <th scope="col"></th>
                 </tr>
               </thead>
@@ -63,15 +57,16 @@
 
               <?php 
 
-                  for($row = 0 ; $row < count($students) ; $row++ ){
-
-                    echo "<tr>";
-                      for($col = 0 ; $col < 6  ; $col++ ){
-                        echo "<th>".$students[$row][$col]."</th>";
-                      }
-                      echo '<td><a href=""><i class="bi bi-pencil fs-5 text-info"></i></a> <a href="" class="m-3"><i class="bi bi-trash fs-5 text-info"></i></a></td>';
-                    echo "</tr>";
-                  }
+                  foreach($content as $student){
+                    echo '<tr>
+                    <td>'.$student['name'].'</td>
+                    <td>'.$student['email'].'</td>
+                    <td>'.$student['phone'].'</td>
+                    <td>'.$student['enroll_number'].'</td>
+                    <td>'.$student['date_of_addmission'].'</td>
+                    <td><a href=""><i class="bi bi-pencil fs-5 text-info"></i></a> <a href="" class="m-3"><i class="bi bi-trash fs-5 text-info"></i></a></td>
+                    </tr>';
+                }
 
                 ?>
 
@@ -80,7 +75,7 @@
 
       </div>
 
-                    </div>
+                  </div>
 
 
                 </div>
